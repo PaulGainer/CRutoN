@@ -1,0 +1,156 @@
+name	priority	interruptable	schedulable	ruleOrder	ruleType	andOrConnector	notConnector	ruleActionText
+answerDoorBell	70	0	1	0	R	0	0	::515:: GOAL-AnserDoorBell is true
+answerDoorBell	70	0	1	1	A	0	0	::0::Care-O-Bot 3.2 says 'Doorbell' and wait for completion
+answerDoorBell	70	0	1	2	A	0	0	Wait for 5 seconds on ::0::Care-O-Bot 3.2
+checkBell	80	0	1	1	R	0	0	Doorbell Last Wattage > 1 AND was in this state within the last 10 seconds
+checkBell	80	0	1	2	A	0	0	SET ::515::GOAL-AnserDoorBell TO  true
+lowerTray	0	0	0	9	R	0	0	::500:: TrayIsRaised is true
+lowerTray	0	0	0	10	R	0	0	::504:: TrayIsEmpty is true
+lowerTray	0	0	0	11	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+lowerTray	0	0	0	12	A	0	0	move tray on ::0::Care-O-Bot 3.2 to Lowered and wait for completion
+lowerTray	0	0	0	13	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+lowerTray	0	0	0	14	A	0	0	SET ::500::TrayIsRaised TO  false
+lowerTray	0	0	0	15	A	0	0	SET ::501::TrayIsLowered TO  true
+raiseTray	0	0	0	13	R	0	0	::501:: TrayIsLowered is true
+raiseTray	0	0	0	14	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+raiseTray	0	0	0	15	A	0	0	move tray on ::0::Care-O-Bot 3.2 to Raised and wait for completion
+raiseTray	0	0	0	16	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+raiseTray	0	0	0	17	A	0	0	SET ::500::TrayIsRaised TO  true
+raiseTray	0	0	0	18	A	0	0	SET ::501::TrayIsLowered TO  false
+S1-alertFridgeDoor	60	0	1	27	R	0	0	Fridge Freezer In *ON* AND has been in this state for more than 30 seconds
+S1-alertFridgeDoor	60	0	1	31	R	0	0	::514:: GOAL-fridgeUserAlerted is false
+S1-alertFridgeDoor	60	0	1	32	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-alertFridgeDoor	60	0	1	34	A	0	0	move ::0::Care-O-Bot 3.2 to ::2:: Living Room and wait for completion
+S1-alertFridgeDoor	60	0	1	35	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-alertFridgeDoor	60	0	1	36	A	0	0	::0::Care-O-Bot 3.2 says 'The fridge door is open!' and wait for completion
+S1-alertFridgeDoor	60	0	1	37	A	0	0	SET ::506::GOAL-gotoCharger TO  false
+S1-alertFridgeDoor	60	0	1	38	A	0	0	SET ::507::GOAL-gotoTable TO  false
+S1-alertFridgeDoor	60	0	1	39	A	0	0	SET ::508::GOAL-gotoSofa TO  false
+S1-alertFridgeDoor	60	0	1	40	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-GoToKitchen,S1-Set-WaitHere
+S1-alertFridgeDoor	60	0	1	41	A	0	0	SET ::514::GOAL-fridgeUserAlerted TO  true
+S1-continueWatchTV	35	1	1	11	R	0	0	::513:: GOAL-watchTV is true
+S1-continueWatchTV	35	1	1	12	R	0	0	Television Wattage > 10
+S1-continueWatchTV	35	1	1	13	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-continueWatchTV	35	1	1	21	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-continueWatchTV	35	1	1	22	A	0	0	move ::0::Care-O-Bot 3.2 to ::31:: TV location in the Living Room
+S1-continueWatchTV	35	1	1	23	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+S1-continueWatchTV	35	1	1	24	A	0	0	move torso on ::0::Care-O-Bot 3.2 to the right and wait for completion
+S1-continueWatchTV	35	1	1	25	A	0	0	move torso on ::0::Care-O-Bot 3.2 to the back position and wait for completion
+S1-continueWatchTV	35	1	1	26	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-ReturnHome,S1-Set-Continue
+S1-goToKitchen	40	1	1	31	R	0	0	::505:: GOAL-gotoKitchen is true
+S1-goToKitchen	40	1	1	32	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-goToKitchen	40	1	1	43	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-goToKitchen	40	1	1	44	A	0	0	move ::0::Care-O-Bot 3.2 to ::7:: Kitchen Entrance in the Dining Room and wait for completion
+S1-goToKitchen	40	1	1	45	A	0	0	Execute sequence 'raiseTray' on ::0::Care-O-Bot 3.2
+S1-goToKitchen	40	1	1	46	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+S1-goToKitchen	40	1	1	47	A	0	0	SET ::505::GOAL-gotoKitchen TO  false
+S1-goToKitchen	40	1	1	48	A	0	0	SET ::509::GOAL-waitAtKitchen TO  true
+S1-gotoSofa	40	1	1	12	R	0	0	::508:: GOAL-gotoSofa is true
+S1-gotoSofa	40	1	1	13	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-gotoSofa	40	1	1	14	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-gotoSofa	40	1	1	15	A	0	0	move ::0::Care-O-Bot 3.2 to ::14:: Living Room Sofa Area in the Living Room and wait for completion
+S1-gotoSofa	40	1	1	16	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-gotoSofa	40	1	1	17	A	0	0	SET ::508::GOAL-gotoSofa TO  false
+S1-gotoSofa	40	1	1	18	A	0	0	SET ::510::GOAL-waitAtSofa TO  true
+S1-gotoTable	40	1	1	8	R	0	0	::507:: GOAL-gotoTable is true
+S1-gotoTable	40	1	1	9	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-gotoTable	40	1	1	10	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-gotoTable	40	1	1	11	A	0	0	move ::0::Care-O-Bot 3.2 to ::23:: Living Room Table in the Living Room Sofa Area of the Living Room and wait for completion
+S1-gotoTable	40	1	1	12	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-gotoTable	40	1	1	13	A	0	0	SET ::507::GOAL-gotoTable TO  false
+S1-gotoTable	40	1	1	14	A	0	0	SET ::511::GOAL-waitAtTable TO  true
+S1-kitchenAwaitCmd	40	1	1	14	R	0	0	::0::Care-O-Bot 3.2 location is ::7:: Kitchen Entrance in the Dining Room
+S1-kitchenAwaitCmd	40	1	1	15	R	0	0	::509:: GOAL-waitAtKitchen is true
+S1-kitchenAwaitCmd	40	1	1	16	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-set-gotoSofa,S1-set-gotoTable,S1-Set-Continue,S1-Set-WaitHere
+S1-kitchenAwaitCmd	40	1	1	17	A	0	0	SET ::509::GOAL-waitAtKitchen TO  false
+S1-Med-5PM	50	1	0	42	R	0	0	Time is on or after 17:00:00
+S1-Med-5PM	50	1	0	43	R	0	0	::502:: 5PM-MedicineDue is true
+S1-Med-5PM	50	1	0	44	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-Med-5PM	50	1	0	45	A	0	0	move ::0::Care-O-Bot 3.2 to ::14:: Living Room Sofa Area in the Living Room and wait for completion
+S1-Med-5PM	50	1	0	46	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-Med-5PM	50	1	0	47	A	0	0	::0::Care-O-Bot 3.2 says 'Its time for your medicine' and wait for completion
+S1-Med-5PM	50	1	0	48	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-GoToKitchen,S1-Set-ReturnHome,S1-Set-WaitHere
+S1-Med-5PM	50	1	0	49	A	0	0	SET ::502::5PM-MedicineDue TO  false
+S1-Med-5PM	50	1	0	50	A	0	0	SET ::503::5PM-MedicineReminder TO  true
+S1-Med-5PM-Remind	50	1	1	11	R	0	0	::503:: 5PM-MedicineReminder is true AND has been in this state for more than 60 seconds
+S1-Med-5PM-Remind	50	1	1	12	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-Med-5PM-Remind	50	1	1	13	A	0	0	move ::0::Care-O-Bot 3.2 to ::14:: Living Room Sofa Area in the Living Room and wait for completion
+S1-Med-5PM-Remind	50	1	1	14	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-Med-5PM-Remind	50	1	1	15	A	0	0	::0::Care-O-Bot 3.2 says 'Have you taken your medicine' and wait for completion
+S1-Med-5PM-Remind	50	1	1	16	A	0	0	SET ::503::5PM-MedicineReminder TO  false
+S1-Med-5PM-Reset	90	0	1	7	R	0	0	Time is between 00:00:00 and 16:59:00
+S1-Med-5PM-Reset	90	0	1	10	R	0	0	::502:: 5PM-MedicineDue is false
+S1-Med-5PM-Reset	90	0	1	11	A	0	0	SET ::502::5PM-MedicineDue TO  true
+S1-Med-5PM-Reset	90	0	1	12	A	0	0	SET ::503::5PM-MedicineReminder TO  false
+S1-remindFridgeDoor	80	0	1	0	R	0	0	::514:: GOAL-fridgeUserAlerted is true AND has been in this state for more than 300 seconds
+S1-remindFridgeDoor	80	0	1	1	A	0	0	SET ::514::GOAL-fridgeUserAlerted TO  false
+S1-ResetAllGoals	0	0	0	19	A	0	0	SET ::500::TrayIsRaised TO  false
+S1-ResetAllGoals	0	0	0	20	A	0	0	SET ::501::TrayIsLowered TO  true
+S1-ResetAllGoals	0	0	0	21	A	0	0	SET ::502::5PM-MedicineDue TO  true
+S1-ResetAllGoals	0	0	0	22	A	0	0	SET ::503::5PM-MedicineReminder TO  false
+S1-ResetAllGoals	0	0	0	23	A	0	0	SET ::504::TrayIsEmpty TO  true
+S1-ResetAllGoals	0	0	0	24	A	0	0	SET ::505::GOAL-gotoKitchen TO  false
+S1-ResetAllGoals	0	0	0	25	A	0	0	SET ::506::GOAL-gotoCharger TO  false
+S1-ResetAllGoals	0	0	0	26	A	0	0	SET ::507::GOAL-gotoTable TO  false
+S1-ResetAllGoals	0	0	0	27	A	0	0	SET ::508::GOAL-gotoSofa TO  false
+S1-ResetAllGoals	0	0	0	28	A	0	0	SET ::509::GOAL-waitAtKitchen TO  false
+S1-ResetAllGoals	0	0	0	29	A	0	0	SET ::510::GOAL-waitAtSofa TO  false
+S1-ResetAllGoals	0	0	0	30	A	0	0	SET ::511::GOAL-waitAtTable TO  false
+S1-ResetAllGoals	0	0	0	31	A	0	0	SET ::512::GOAL-waitHere TO  false
+S1-ResetAllGoals	0	0	0	32	A	0	0	SET ::513::GOAL-watchTV TO  false
+S1-ResetAllGoals	0	0	0	33	A	0	0	SET ::514::GOAL-fridgeUserAlerted TO  false
+S1-ReturnHome	40	1	1	15	R	0	0	::506:: GOAL-gotoCharger is true
+S1-ReturnHome	40	1	1	16	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-ReturnHome	40	1	1	17	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-ReturnHome	40	1	1	18	A	0	0	move ::0::Care-O-Bot 3.2 to ::5:: ChargingStation Area in the Dining Room and wait for completion
+S1-ReturnHome	40	1	1	19	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+S1-ReturnHome	40	1	1	20	A	0	0	SET ::506::GOAL-gotoCharger TO  false
+S1-Set-Continue	0	0	0	1	A	0	0	SET ::512::GOAL-waitHere TO  false
+S1-Set-Continue	0	0	0	2	A	0	0	SET ::513::GOAL-watchTV TO  false
+S1-Set-GoToKitchen	0	0	0	3	A	0	0	SET ::505::GOAL-gotoKitchen TO  true
+S1-Set-GoToKitchen	0	0	0	4	A	0	0	SET ::512::GOAL-waitHere TO  false
+S1-Set-GoToSofa	0	0	0	2	A	0	0	SET ::508::GOAL-gotoSofa TO  true
+S1-Set-GoToTable	0	0	0	2	A	0	0	SET ::507::GOAL-gotoTable TO  true
+S1-Set-ReturnHome	0	0	0	6	A	0	0	SET ::506::GOAL-gotoCharger TO  true
+S1-Set-ReturnHome	0	0	0	7	A	0	0	SET ::512::GOAL-waitHere TO  false
+S1-Set-ReturnHome	0	0	0	8	A	0	0	SET ::513::GOAL-watchTV TO  false
+S1-Set-WaitHere	0	0	0	1	A	0	0	SET ::512::GOAL-waitHere TO  true
+S1-Set-Watch-TV	0	0	0	2	A	0	0	SET ::513::GOAL-watchTV TO  true
+S1-Set-Watch-TV	0	0	0	3	A	0	0	SET ::512::GOAL-waitHere TO  false
+S1-sleep	10	1	1	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+S1-sleep	10	1	1	5	A	0	0	Wait for 1 seconds on ::0::Care-O-Bot 3.2
+S1-sleep	10	1	1	6	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-sleep	10	1	1	7	A	0	0	Wait for 1 seconds on ::0::Care-O-Bot 3.2
+S1-sleep	10	1	1	8	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+S1-sofaAwaitCmd	40	1	1	15	R	0	0	::0::Care-O-Bot 3.2 location is ::14:: Living Room Sofa Area in the Living Room
+S1-sofaAwaitCmd	40	1	1	16	R	0	0	::510:: GOAL-waitAtSofa is true
+S1-sofaAwaitCmd	40	1	1	17	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-ReturnHome,S1-Set-WaitHere,S1-Set-Continue
+S1-sofaAwaitCmd	40	1	1	18	A	0	0	SET ::510::GOAL-waitAtSofa TO  false
+S1-tableAwaitCmd	40	1	1	8	R	0	0	::0::Care-O-Bot 3.2 location is ::23:: Living Room Table in the Living Room Sofa Area of the Living Room
+S1-tableAwaitCmd	40	1	1	9	R	0	0	::511:: GOAL-waitAtTable is true
+S1-tableAwaitCmd	40	1	1	10	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-ReturnHome,S1-Set-WaitHere,S1-Set-Continue
+S1-tableAwaitCmd	40	1	1	11	A	0	0	SET ::511::GOAL-waitAtTable TO  false
+S1-WaitHere	40	1	1	14	R	0	0	::512:: GOAL-waitHere is true
+S1-WaitHere	40	1	1	15	A	0	0	Execute sequence 'S1-sleep' on ::0::Care-O-Bot 3.2
+S1-WaitHere	40	1	1	16	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-WaitHere,S1-Set-ReturnHome,S1-Set-Continue
+S1-watchTV	30	1	1	32	R	2	0	Living room sofa seat 1 is occupied
+S1-watchTV	30	1	1	33	R	2	0	Living room sofa seat 2 is occupied
+S1-watchTV	30	1	1	34	R	2	0	Living room sofa seat 3 is occupied
+S1-watchTV	30	1	1	35	R	2	0	Living room sofa seat 4 is occupied
+S1-watchTV	30	1	1	36	R	0	0	Living room sofa seat 5 is occupied
+S1-watchTV	30	1	1	37	R	0	0	Television Wattage > 10
+S1-watchTV	30	1	1	44	R	0	0	::513:: GOAL-watchTV is false AND has been in this state for more than 3600 seconds
+S1-watchTV	30	1	1	45	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+S1-watchTV	30	1	1	47	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+S1-watchTV	30	1	1	48	A	0	0	move ::0::Care-O-Bot 3.2 to ::14:: Living Room Sofa Area in the Living Room and wait for completion
+S1-watchTV	30	1	1	49	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+S1-watchTV	30	1	1	50	A	0	0	::0::Care-O-Bot 3.2 says 'Shall we watch TV together?' and wait for completion
+S1-watchTV	30	1	1	51	A	0	0	SET ::513::GOAL-watchTV TO  true
+S1-watchTV	30	1	1	52	A	0	0	::0::Care-O-Bot 3.2 GUI,S1-Set-Watch-TV,S1-Set-ReturnHome,S1-Set-Continue
+T-medicine	0	0	0	0	R	0	0	Time is on or after 17:00:00
+T-medicine	0	0	0	1	A	0	0	Execute sequence 'T-moveTo-person' on ::0::Care-O-Bot 3.2
+T-moveTo-person	0	0	0	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow and wait for completion
+T-moveTo-person	0	0	0	1	A	0	0	move ::0::Care-O-Bot 3.2 to ::999:: Current user Location
+T-moveTo-person	0	0	0	2	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+unCheckBell	80	0	1	0	R	0	0	::515:: GOAL-AnserDoorBell is true AND has been in this state for more than 10 seconds
+unCheckBell	80	0	1	1	A	0	0	SET ::515::GOAL-AnserDoorBell TO  false

@@ -1,0 +1,6 @@
+The included makefile is configured to build CrutoN v1.0.0 in a windows
+environment. To compile for linux please change WINDOWS to LINUX
+in the makefile.
+
+Simply use 'make' to build the software. Any g++ compiler
+used to build the executable must support C++ 11 features.

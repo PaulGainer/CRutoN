@@ -1,0 +1,324 @@
+name	priority	interruptable	schedulable	ruleOrder	ruleType	andOrConnector	notConnector	ruleActionText
+a1	38	1	1	0	R	0	0	When:  At 15:00
+a1	38	1	1	1	R	0	0	When: Repeat every: 1 days
+a1	38	1	1	2	R	0	0	When: Remind me/Reset after 1 days 
+a1	38	1	1	3	R	0	0	700a1 is true
+a1	38	1	1	4	A	0	0	::0::Care-O-Bot 3.2 says 'Whats up' and wait for completion
+a1	38	1	1	5	A	0	0	SET ::700::a1 TO false
+a2	37	1	1	0	R	0	0	When:  At 15:20
+a2	37	1	1	1	R	0	0	When: Repeat every: 1 days
+a2	37	1	1	2	R	0	0	When: Remind me/Reset after 1 days 
+a2	37	1	1	3	R	0	0	701a2 is true
+a2	37	1	1	4	A	0	0	::0::Care-O-Bot 3.2 says 'Thats not very nice' and wait for completion
+a2	37	1	1	5	A	0	0	SET ::701::a2 TO false
+a3	36	1	1	0	R	0	0	When: Repeat every: 1 days
+a3	36	1	1	1	R	0	0	When: Remind me/Reset after 1 days 
+a3	36	1	1	2	R	0	0	702a3 is true
+a3	36	1	1	3	A	0	0	::0::Care-O-Bot 3.2 says 'Ok have it your way' and wait for completion
+a3	36	1	1	4	A	0	0	Make the robot nod (nod)
+a3	36	1	1	5	A	0	0	SET ::702::a3 TO false
+AlertFridge	21	1	1	0	R	0	0	Fridge Freezer Wattage > 30 AND has been in this state for more than 600 seconds
+AlertFridge	21	1	1	4	R	0	0	::506:: fridgeAlert is notGiven
+AlertFridge	21	1	1	8	A	0	0	move ::0::Care-O-Bot 3.2 to ::999:: Current user Location and wait for completion
+AlertFridge	21	1	1	9	A	0	0	::0::Care-O-Bot 3.2 says 'The fridge door is open!'
+AlertFridge	21	1	1	12	A	0	0	SET ::506::fridgeAlert TO  given
+answerdoorbell	30	1	1	0	R	0	0	When: The doorbell has rung (DoorbellRang)
+answerdoorbell	30	1	1	1	R	0	0	When: Remind me/Reset after 1 minutes 
+answerdoorbell	30	1	1	2	R	0	0	703answerdoorbell is true
+answerdoorbell	30	1	1	3	A	0	0	Make the robot come to wherever I am (comeToMe)
+answerdoorbell	30	1	1	4	A	0	0	Make the robot nod (nod)
+answerdoorbell	30	1	1	5	A	0	0	::0::Care-O-Bot 3.2 says 'doorbell has rung' and wait for completion
+answerdoorbell	30	1	1	6	A	0	0	SET ::703::answerdoorbell TO false
+attractAttention	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  red
+attractAttention	0	0	0	15	A	0	0	move torso on ::3::Care-O-Bot 3.6 to shake
+attractAttention	0	0	0	16	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  green
+attractAttention	0	0	0	17	A	0	0	Wait for 0.02 seconds on ::3::Care-O-Bot 3.6
+attractAttention	0	0	0	18	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+attractAttention	0	0	0	19	A	0	0	Wait for 0.02 seconds on ::3::Care-O-Bot 3.6
+attractAttention	0	0	0	21	A	0	0	Wait for 0.02 seconds on ::3::Care-O-Bot 3.6
+attractAttention	0	0	0	22	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+attractAttention	0	0	0	23	A	0	0	Wait for 0.02 seconds on ::3::Care-O-Bot 3.6
+basicGUI	0	0	0	0	A	0	0	Set expression on ::3::Care-O-Bot 3.6 to basic
+basicGUI	0	0	0	1	A	0	0	SET ::516::currentGUIexpression TO  Basic
+checkFridge	30	1	1	0	R	0	0	When: The fridge has been open or the kettle or dishwasher have been on for 5 mins (frgOnFor:5:)
+checkFridge	30	1	1	1	R	0	0	719checkFridge is true
+checkFridge	30	1	1	2	A	0	0	Send the robot to the LivingRoom::2::, lowering tray if possible (gotoLivingRoom::2::)
+checkFridge	30	1	1	3	A	0	0	::0::Care-O-Bot 3.2 says 'The fridge door is open!' and wait for completion
+checkFridge	30	1	1	4	A	0	0	SET ::719::checkFridge TO false
+checkKettle	50	1	0	0	R	0	0	Kettle is Off AND has been in this state for more than 120 seconds
+checkKettle	50	1	0	3	R	0	0	::505:: UserToldToDrink is False
+checkKettle	50	1	0	6	R	0	0	::504:: userNeedsDrink is False
+checkKettle	50	1	0	8	A	0	0	SET ::504::userNeedsDrink TO  True
+comeToMe	0	0	0	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+comeToMe	0	0	0	1	A	0	0	move ::0::Care-O-Bot 3.2 to ::999:: Current user Location
+comeToMe	0	0	0	2	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow and wait for completion
+gotoAlternativUnload	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoAlternativUnload	0	0	0	3	A	0	0	move tray on ::3::Care-O-Bot 3.6 to Lowered and wait for completion
+gotoAlternativUnload	0	0	0	6	A	0	0	move ::3::Care-O-Bot 3.6 to ::612:: Alternative Table Unload in the ZUYD Apartment and wait for completion
+gotoAlternativUnload	0	0	0	7	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoCentralLocation	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoCentralLocation	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoCentralLocation	0	0	0	2	A	0	0	move ::3::Care-O-Bot 3.6 to ::613:: Apartment Central in the ZUYD Apartment and wait for completion
+gotoCentralLocation	0	0	0	3	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoCentralLocation-SET	0	0	0	0	A	0	0	SET ::503::goto TO  CentralLocation
+gotoCentralLocationCondition	91	0	1	1	R	0	0	::503:: goto is CentralLocation
+gotoCentralLocationCondition	91	0	1	2	A	0	0	Execute sequence 'gotoCentralLocation' on ::3::Care-O-Bot 3.6
+gotoCentralLocationCondition	91	0	1	3	A	0	0	SET ::503::goto TO  Null
+gotoChargingStation	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoChargingStation	0	0	0	2	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoChargingStation	0	0	0	3	A	0	0	move ::3::Care-O-Bot 3.6 to ::610:: Charging Position in the ZUYD Apartment and wait for completion
+gotoChargingStation	0	0	0	5	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoChargingStation-SET 0 0 0 0 A 0 0 SET ::503::goto TO ChargingStation
+gotoChargingStationCondition	90	0	1	4	R	0	0	::503:: goto is ChargingStation
+gotoChargingStationCondition	90	0	1	5	A	0	0	Execute sequence 'gotoChargingStation' on ::3::Care-O-Bot 3.6
+gotoChargingStationCondition	90	0	1	7	A	0	0	SET ::503::goto TO  Null
+gotoCurrentUserLocation	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoCurrentUserLocation	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoCurrentUserLocation	0	0	0	3	A	0	0	move ::3::Care-O-Bot 3.6 to ::999:: Current user Location and wait for completion
+gotoCurrentUserLocation	0	0	0	4	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoCurrentUserLocation-SET	0	0	0	2	A	0	0	SET ::503::goto TO  CurrentUserLocation
+gotoCurrentUserLocationCondition	90	0	1	6	R	0	0	::503:: goto is CurrentUserLocation
+gotoCurrentUserLocationCondition	90	0	1	7	A	0	0	Execute sequence 'gotoCurrentUserLocation' on ::3::Care-O-Bot 3.6
+gotoCurrentUserLocationCondition	90	0	1	8	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+gotoCurrentUserLocationCondition	90	0	1	9	A	0	0	SET ::503::goto TO  Null
+gotoFridge	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoFridge	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoFridge	0	0	0	2	A	0	0	move ::3::Care-O-Bot 3.6 to ::602:: Kitchen Fridge in the ZUYD Apartment and wait for completion
+gotoFridge	0	0	0	13	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoFridge-SET	0	0	0	2	A	0	0	SET ::503::goto TO  Fridge
+gotoFridgeCondition	90	0	1	6	R	0	0	::503:: goto is Fridge
+gotoFridgeCondition	90	0	1	7	A	0	0	Execute sequence 'gotoFridge' on ::3::Care-O-Bot 3.6
+gotoFridgeCondition	90	0	1	9	A	0	0	SET ::503::goto TO  Null
+gotoFrontDoorLeft	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6  to  yellow
+gotoFrontDoorLeft	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6 
+gotoFrontDoorLeft	0	0	0	2	A	0	0	move ::3::Care-O-Bot 3.6  to ::603:: Door Left Side in the ZUYD Apartment and wait for completion
+gotoFrontDoorLeft	0	0	0	4	A	0	0	move eyes on ::3::Care-O-Bot 3.6  to front and wait for completion
+gotoFrontDoorLeft	0	0	0	11	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+gotoFrontDoorLeft	0	0	0	12	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoFrontDoorLeft-SET	0	0	0	0	A	0	0	SET ::503::goto TO  frontDoorLeft
+gotoFrontDoorLeftCondition	90	0	1	6	R	0	0	::503:: goto is FrontDoorLeft
+gotoFrontDoorLeftCondition	90	0	1	7	A	0	0	Execute sequence 'gotoFrontDoorLeft' on ::3::Care-O-Bot 3.6
+gotoFrontDoorLeftCondition	90	0	1	8	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+gotoFrontDoorLeftCondition	90	0	1	9	A	0	0	SET ::503::goto TO  Null
+gotoKitchen	0	0	0	3	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+gotoKitchen	0	0	0	4	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+gotoKitchen	0	0	0	5	A	0	0	move ::0::Care-O-Bot 3.2 to ::7:: Kitchen Entrance in the Dining Room and wait for completion
+gotoKitchen	0	0	0	6	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+gotoKitchenOnCond	35	1	1	0	R	0	0	::503:: goto is kitchen
+gotoKitchenOnCond	35	1	1	1	A	0	0	Execute sequence 'gotoKitchenWait' on ::0::Care-O-Bot 3.2
+gotoKitchenWait	0	0	0	0	A	0	0	Execute sequence 'gotoKitchen' on ::0::Care-O-Bot 3.2
+gotoKitchenWait	0	0	0	11	A	0	0	Execute sequence 'raiseTray' on ::0::Care-O-Bot 3.2
+gotoKitchenWait	0	0	0	12	A	0	0	SET ::503::goto TO  null
+gotoLivingRoom::2::	30	1	1	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to white
+gotoLivingRoom::2::	30	1	1	1	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+gotoLivingRoom::2::	30	1	1	2	A	0	0	move ::0::Care-O-Bot 3.2 to LivingRoom::2:: and wait for completion
+gotoLivingRoom::2::	30	1	1	3	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to yellow
+gotoLivingRoomSofaAreaintheLivingRoom::14::	30	1	1	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to white
+gotoLivingRoomSofaAreaintheLivingRoom::14::	30	1	1	1	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+gotoLivingRoomSofaAreaintheLivingRoom::14::	30	1	1	2	A	0	0	move ::0::Care-O-Bot 3.2 to LivingRoomSofaAreaintheLivingRoom::14:: and wait for completion
+gotoLivingRoomSofaAreaintheLivingRoom::14::	30	1	1	3	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to yellow
+gotoSofa	0	0	0	4	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+gotoSofa	0	0	0	5	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+gotoSofa	0	0	0	6	A	0	0	move ::0::Care-O-Bot 3.2 to ::14:: Living Room Sofa Area in the Living Room and wait for completion
+gotoSofa	0	0	0	7	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white
+gotoSofaLeft	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoSofaLeft	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoSofaLeft	0	0	0	2	A	0	0	move ::3::Care-O-Bot 3.6 to ::609:: Small Sofa Left Offer in the ZUYD Apartment and wait for completion
+gotoSofaLeft	0	0	0	3	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoSofaLeft-SET	0	0	0	2	A	0	0	SET ::503::goto TO  SofaLeft
+gotoSofaLeftCondition	90	0	1	5	R	0	0	::503:: goto is SofaLeft
+gotoSofaLeftCondition	90	0	1	6	A	0	0	Execute sequence 'gotoSofaLeft' on ::3::Care-O-Bot 3.6
+gotoSofaLeftCondition	90	0	1	7	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+gotoSofaLeftCondition	90	0	1	8	A	0	0	SET ::503::goto TO  Null
+gotoSofaOnCond	35	1	1	0	R	0	0	::503:: goto is sofa
+gotoSofaOnCond	35	1	1	2	A	0	0	Execute sequence 'gotoSofaWait' on ::0::Care-O-Bot 3.2
+gotoSofaWait	0	0	0	0	A	0	0	Execute sequence 'gotoSofa' on ::0::Care-O-Bot 3.2
+gotoSofaWait	0	0	0	1	A	0	0	Execute sequence 'raiseTray' on ::0::Care-O-Bot 3.2
+gotoSofaWait	0	0	0	3	A	0	0	SET ::503::goto TO  null
+gotoTable	0	0	0	0	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+gotoTable	0	0	0	2	A	0	0	Execute sequence 'lowerTray' on ::0::Care-O-Bot 3.2
+gotoTable	0	0	0	3	A	0	0	move ::0::Care-O-Bot 3.2 to ::23:: Living Room Table in the Living Room Sofa Area of the Living Room and wait for completion
+gotoTable	0	0	0	5	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+gotoTableOnCond	35	1	1	0	R	0	0	::503:: goto is table
+gotoTableOnCond	35	1	1	2	A	0	0	Execute sequence 'gotoTableWait' on ::0::Care-O-Bot 3.2
+gotoTableRightUnlCondition	91	0	1	0	R	0	0	::503:: goto is TableUnload
+gotoTableRightUnlCondition	91	0	1	1	A	0	0	Execute sequence 'gotoTableRightUnload' on ::3::Care-O-Bot 3.6
+gotoTableRightUnlCondition	91	0	1	2	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+gotoTableRightUnlCondition	91	0	1	3	A	0	0	SET ::503::goto TO  Null
+gotoTableRightUnload	0	0	0	0	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+gotoTableRightUnload	0	0	0	1	A	0	0	Execute sequence 'lowerTray' on ::3::Care-O-Bot 3.6
+gotoTableRightUnload	0	0	0	2	A	0	0	move ::3::Care-O-Bot 3.6 to ::606:: Table Right Unload in the ZUYD Apartment and wait for completion
+gotoTableRightUnload	0	0	0	3	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+gotoTableRightUnload-SET	0	0	0	0	A	0	0	SET ::503::goto TO  TableUnload
+gotoTableWait	35	1	0	0	A	0	0	Execute sequence 'gotoTable' on ::0::Care-O-Bot 3.2
+gotoTableWait	35	1	0	3	A	0	0	Execute sequence 'raiseTray' on ::0::Care-O-Bot 3.2
+gotoTableWait	35	1	0	4	A	0	0	SET ::503::goto TO  null
+happyGUI	0	0	0	3	A	0	0	Set expression on ::3::Care-O-Bot 3.6 to joy
+happyGUI	0	0	0	4	A	0	0	SET ::516::currentGUIexpression TO  Happy
+locationGUI	0	0	1	4	A	0	0	::0::Care-O-Bot 3.2 GUI,setGotoSofaCond,setGotoTableCond,setGotoKitchenCond,setGotoNull
+lowerTray	0	0	0	0	R	0	0	::500:: trayIs is empty
+lowerTray	0	0	0	1	R	0	0	::501:: trayStatus is raised
+lowerTray	0	0	0	2	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+lowerTray	0	0	0	6	A	0	0	move tray on ::0::Care-O-Bot 3.2 to Lowered and wait for completion
+lowerTray	0	0	0	7	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+lowerTray	0	0	0	8	A	0	0	SET ::501::trayStatus TO  lowered
+lowerTray	0	0	0	10	R	0	0	::500:: trayIs is Empty
+lowerTray	0	0	0	11	R	0	0	::501:: trayStatus is Raised
+lowerTray	0	0	0	12	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+lowerTray	0	0	0	15	A	0	0	move tray on ::3::Care-O-Bot 3.6 to Lowered
+lowerTray	0	0	0	16	A	0	0	Wait for 7 seconds on ::3::Care-O-Bot 3.6
+lowerTray	0	0	0	17	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+nod	0	0	0	0	A	0	0	move torso on ::0::Care-O-Bot 3.2 to the back position and wait for completion
+nod	0	0	0	1	A	0	0	move torso on ::0::Care-O-Bot 3.2 to the forward position and wait for completion
+nod	0	0	0	2	A	0	0	move torso on ::0::Care-O-Bot 3.2 to home position and wait for completion
+raiseTray	0	0	0	0	R	0	0	::501:: trayStatus is lowered
+raiseTray	0	0	0	1	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  yellow
+raiseTray	0	0	0	5	A	0	0	move tray on ::0::Care-O-Bot 3.2 to Raised and wait for completion
+raiseTray	0	0	0	6	A	0	0	Turn light on ::0::Care-O-Bot 3.2 to  white and wait for completion
+raiseTray	0	0	0	7	A	0	0	SET ::501::trayStatus TO  raised
+raiseTray	0	0	0	9	R	0	0	::501:: trayStatus is Lowered
+raiseTray	0	0	0	10	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  yellow
+raiseTray	0	0	0	12	A	0	0	move tray on ::3::Care-O-Bot 3.6 to Raised and wait for completion
+raiseTray	0	0	0	13	A	0	0	Turn light on ::3::Care-O-Bot 3.6 to  white
+RemindMedicine	30	1	1	0	R	0	0	When:  At 17:00
+RemindMedicine	30	1	1	1	R	0	0	720RemindMedicine is true
+RemindMedicine	30	1	1	2	A	0	0	Send the robot to the LivingRoomSofaAreaintheLivingRoom::14::, lowering tray if possible (gotoLivingRoomSofaAreaintheLivingRoom::14::)
+RemindMedicine	30	1	1	3	A	0	0	::0::Care-O-Bot 3.2 says 'It's time for your medicine' and wait for completion
+RemindMedicine	30	1	1	4	A	0	0	SET ::720::RemindMedicine TO false
+reset-a1	80	1	1	0	R	0	0	700a1 is false and has been for 86400 seconds
+reset-a1	80	1	1	1	A	0	0	SET ::700::a1 TO true
+reset-a2	80	1	1	0	R	0	0	701a2 is false and has been for 86400 seconds
+reset-a2	80	1	1	1	A	0	0	SET ::701::a2 TO true
+reset-a3	80	1	1	0	R	0	0	702a3 is false and has been for 86400 seconds
+reset-a3	80	1	1	1	A	0	0	SET ::702::a3 TO true
+reset-answerdoorbell	80	1	1	0	R	0	0	703answerdoorbell is false and has been for 60 seconds
+reset-answerdoorbell	80	1	1	1	A	0	0	SET ::703::answerdoorbell TO true
+reset-checkFridge	80	1	1	0	R	0	0	719checkFridge is false and has been for 0 seconds
+reset-checkFridge	80	1	1	1	A	0	0	SET ::719::checkFridge TO true
+reset-RemindMedicine	80	1	1	0	R	0	0	720RemindMedicine is false and has been for 0 seconds
+reset-RemindMedicine	80	1	1	1	A	0	0	SET ::720::RemindMedicine TO true
+resetAll	0	0	0	5	A	0	0	SET ::503::goto TO  Null
+resetAll	0	0	0	6	A	0	0	SET ::510::UserDrinkStatus TO  NotReminded
+resetAll	0	0	0	7	A	0	0	SET ::512::AP_gotoDoor TO  False
+ResetALL	0	0	0	8	A	0	0	SET ::706::wakeMeUpInTheAfternoon TO  true
+resetAll	0	0	0	8	A	0	0	SET ::514::AP_ignoreDoorbell TO  False
+resetAll	0	0	0	9	A	0	0	SET ::513::AP_gotoFridge TO  False
+resetAll	0	0	0	10	A	0	0	Change Action Possibility ::200::Answer the Door (dutch) to 0
+resetAll	0	0	0	11	A	0	0	Change Action Possibility ::201::Ignore the Doorbell (dutch) to 0
+resetAll	0	0	0	12	A	0	0	SET ::519::trayHasCup TO  False
+resetAll	0	0	0	13	A	0	0	SET ::519::cupLocation TO  Fridge
+resetAll	0	0	0	14	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+resetAll	0	0	0	15	A	0	0	SET ::515::doorBellReminder TO  False
+resetAll	0	0	0	16	A	0	0	SET ::518::AP_gotoChargingArea TO  False
+resetAll	0	0	0	17	A	0	0	Change Action Possibility ::202::  Shall we get a drink together? (Dutch) to 0
+resetAll	0	0	0	18	A	0	0	Change Action Possibility ::203::Shall I return to charging area? (Dutch) to 0
+resetAll	0	0	0	19	A	0	0	SET ::519::cupLocation TO  Fridge
+resetAll	0	0	0	20	A	0	0	Change Action Possibility ::204::You really should have a drink now (Dutch) to 0
+resetAll	0	0	0	21	A	0	0	SET ::511::userShouldDrink TO  NotReminded
+resetAll	0	0	0	22	A	0	0	SET ::507::dummyGUIpredicate TO  False
+resetAll	0	0	0	23	A	0	0	SET ::511::userShouldDrink TO  NotReminded
+resetAPDrinkReminderIcon	91	0	1	0	R	0	0	::507:: dummyGUIpredicate is True
+resetAPDrinkReminderIcon	91	0	1	2	A	0	0	Change Action Possibility ::204::You really should have a drink now (Dutch) to 0
+resetAPDrinkReminderIcon	91	0	1	3	A	0	0	SET ::507::dummyGUIpredicate TO  False
+resetDoorBellReminded	91	0	1	4	R	0	0	::515:: doorBellReminder is True AND has been in this state for more than 20 seconds
+resetDoorBellReminded	91	0	1	5	A	0	0	SET ::515::doorBellReminder TO  False
+resetDrinkReminder	91	0	1	8	R	0	0	::510:: UserDrinkStatus is Reminded AND has been in this state for more than 180 seconds
+resetDrinkReminder	91	0	1	9	A	0	0	SET ::510::UserDrinkStatus TO  NotReminded
+resetShouldDrinkReminder	91	0	1	3	R	0	0	::511:: userShouldDrink is Reminded AND has been in this state for more than 180 seconds
+resetShouldDrinkReminder	91	0	1	4	A	0	0	SET ::511::userShouldDrink TO  NotReminded
+resetShouldDrinkReminder	91	0	1	24	A	0	0	Change Action Possibility ::204::You really should have a drink now (Dutch) to 0
+s2-CheckUserDrinking	30	0	1	0	R	0	0	ZUYD Cup is Full AND has been in this state for more than 60 seconds
+s2-CheckUserDrinking	30	0	1	1	R	0	0	::511:: userShouldDrink is NotReminded
+s2-CheckUserDrinking	30	0	1	2	R	0	0	::519:: cupLocation is Table
+s2-CheckUserDrinking	30	0	1	3	A	0	0	SET ::511::userShouldDrink TO  Reminded
+s2-CheckUserDrinking	30	0	1	8	A	0	0	Change Action Possibility ::204::You really should have a drink now (Dutch) to 1
+s2-CheckUserDrinking	30	0	1	9	A	0	0	Execute sequence 'sadGUI' on ::3::Care-O-Bot 3.6
+s2-CheckUserDrinking	30	0	1	10	A	0	0	Execute sequence 'attractAttention' on ::3::Care-O-Bot 3.6
+s2-HappyToBasic-Timeout	60	0	1	0	R	0	0	::516:: currentGUIexpression is Happy AND has been in this state for more than 30 seconds
+s2-HappyToBasic-Timeout	60	0	1	1	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+s2-SurprisedToBasic-Timeout	60	0	1	0	R	0	0	::516:: currentGUIexpression is Surprised AND has been in this state for more than 30 seconds
+s2-SurprisedToBasic-Timeout	60	0	1	1	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+s2-UserHasDrunk	30	0	1	0	R	0	0	::519:: cupLocation is Table
+s2-UserHasDrunk	30	0	1	1	R	0	0	ZUYD Cup is Empty
+s2-UserHasDrunk	30	0	1	4	R	0	0	::510:: UserDrinkStatus is WaitingToDrink
+s2-UserHasDrunk	30	0	1	10	A	0	0	SET ::510::UserDrinkStatus TO  NotReminded
+s2-UserHasDrunk	30	0	1	11	A	0	0	Execute sequence 'happyGUI' on ::3::Care-O-Bot 3.6
+s2-UserHasDrunk	30	0	1	12	A	0	0	Change Action Possibility ::204::You really should have a drink now (Dutch) to 0
+s2-UserHasDrunk	30	0	1	13	A	0	0	Execute sequence 'gotoChargingStation-SET' on ::3::Care-O-Bot 3.6
+s2_collectDrinkAtFridge	30	0	1	0	R	0	0	ZUYD Fridge Door previously open AND was in this state within the last 30 seconds
+s2_collectDrinkAtFridge	30	0	1	2	R	0	0	::500:: trayIs is Full AND has been in this state for more than 5 seconds
+s2_collectDrinkAtFridge	30	0	1	4	R	0	0	Location of ::3::Care-O-Bot 3.6 is ::602:: Kitchen Fridge in the ZUYD Apartment
+s2_collectDrinkAtFridge	30	0	1	10	A	0	0	SET ::519::cupLocation TO  Tray
+s2_collectDrinkAtFridge	30	0	1	11	A	0	0	SET ::510::UserDrinkStatus TO  WaitingToDrink
+s2_collectDrinkAtFridge	30	0	1	16	A	0	0	Execute sequence 'gotoCentralLocation' on ::3::Care-O-Bot 3.6
+s2_collectDrinkAtFridge	30	0	1	17	A	0	0	Execute sequence 'gotoTableRightUnload-SET' on ::3::Care-O-Bot 3.6
+s2_depositCup	30	0	1	9	R	0	0	Location of ::3::Care-O-Bot 3.6 is ::606:: Table Right Unload in the ZUYD Apartment
+s2_depositCup	30	0	1	11	R	0	0	::500:: trayIs is Full
+s2_depositCup	30	0	1	12	R	0	0	::519:: cupLocation is Tray
+s2_depositCup	30	0	1	13	A	0	0	arm to Grasp from tray, place on table height 0.45 and wait for completion
+s2_depositCup	30	0	1	14	A	0	0	SET ::519::cupLocation TO  Table
+s2_depositCupAlt	30	0	1	0	A	0	0	arm to Grasp from tray, place on table height 0.45 and wait for completion
+s2_doorbell	30	0	1	0	R	0	0	ZUYD Doorbell previously On AND was in this state within the last 20 seconds
+s2_doorbell	30	0	1	1	R	0	0	::515:: doorBellReminder is False
+s2_doorbell	30	0	1	2	A	0	0	SET ::515::doorBellReminder TO  True
+s2_doorbell	30	0	1	3	A	0	0	Execute sequence 'surprisedGUI' on ::3::Care-O-Bot 3.6
+s2_doorbell	30	0	1	4	A	0	0	Execute sequence 'attractAttention' on ::3::Care-O-Bot 3.6
+s2_doorbell	30	0	1	5	A	0	0	Change Action Possibility ::200::Answer the Door (dutch) to 1
+s2_doorbell	30	0	1	6	A	0	0	Change Action Possibility ::201::Ignore the Doorbell (dutch) to 1
+s2_doorbell-answer	30	0	1	1	R	0	0	::512:: AP_gotoDoor is True
+s2_doorbell-answer	30	0	1	2	A	0	0	SET ::512::AP_gotoDoor TO  False
+s2_doorbell-answer	30	0	1	7	A	0	0	Change Action Possibility ::200::Answer the Door (dutch) to 0
+s2_doorbell-answer	30	0	1	8	A	0	0	Change Action Possibility ::201::Ignore the Doorbell (dutch) to 0
+s2_doorbell-answer	30	0	1	11	A	0	0	Execute sequence 'gotoFrontDoorLeft-SET' on ::3::Care-O-Bot 3.6
+s2_doorbell-ignore	30	0	1	0	R	0	0	::514:: AP_ignoreDoorbell is True
+s2_doorbell-ignore	30	0	1	2	A	0	0	SET ::514::AP_ignoreDoorbell TO  False
+s2_doorbell-ignore	30	0	1	5	A	0	0	Change Action Possibility ::200::Answer the Door (dutch) to 0
+s2_doorbell-ignore	30	0	1	6	A	0	0	Change Action Possibility ::201::Ignore the Doorbell (dutch) to 0
+s2_doorbell-ignore	30	0	1	8	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+s2_doorbell_alreadyAtDoor	31	0	0	0	R	0	0	ZUYD Doorbell previously On AND was in this state within the last 20 seconds
+s2_doorbell_alreadyAtDoor	31	0	0	1	R	0	0	Location of ::3::Care-O-Bot 3.6 is ::603:: Door Left Side in the ZUYD Apartment
+s2_doorbell_alreadyAtDoor	31	0	0	2	A	0	0	Execute sequence 'surprisedGUI' on ::3::Care-O-Bot 3.6
+s2_doorbell_alreadyAtDoor	31	0	0	3	A	0	0	Execute sequence 'raiseTray' on ::3::Care-O-Bot 3.6
+s2_doorbell_alreadyAtDoor	31	0	0	6	A	0	0	Change Action Possibility ::201::Ignore the Doorbell (dutch) to 1
+s2_doorbell_alreadyAtDoor	31	0	0	7	A	0	0	Change Action Possibility ::200::Answer the Door (dutch) to 1
+s2_drinkWarning	29	1	1	26	R	0	0	ZUYD Fridge Door is closed AND has been in this state for more than 180 seconds
+s2_drinkWarning	29	1	1	27	R	0	0	::510:: UserDrinkStatus is NotReminded
+s2_drinkWarning	29	1	1	29	A	0	0	SET ::510::UserDrinkStatus TO  Reminded
+s2_drinkWarning	29	1	1	30	A	0	0	Execute sequence 'sadGUI' on ::3::Care-O-Bot 3.6
+s2_drinkWarning	29	1	1	31	A	0	0	Change Action Possibility ::202::  Shall we get a drink together? (Dutch) to 1
+s2_drinkWarning	29	1	1	32	A	0	0	Change Action Possibility ::203::Shall I return to charging area? (Dutch) to 1
+s2_gotoChargingArea	30	0	1	0	R	0	0	::518:: AP_gotoChargingArea is True
+s2_gotoChargingArea	30	0	1	1	A	0	0	SET ::518::AP_gotoChargingArea TO  False
+s2_gotoChargingArea	30	0	1	2	A	0	0	Change Action Possibility ::202::  Shall we get a drink together? (Dutch) to 0
+s2_gotoChargingArea	30	0	1	3	A	0	0	Change Action Possibility ::203::Shall I return to charging area? (Dutch) to 0
+s2_gotoChargingArea	30	0	1	4	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+s2_gotoChargingArea	30	0	1	5	A	0	0	Execute sequence 'gotoChargingStation-SET' on ::3::Care-O-Bot 3.6
+s2_gotoFridge	30	0	1	0	R	0	0	::513:: AP_gotoFridge is True
+s2_gotoFridge	30	0	1	1	A	0	0	SET ::513::AP_gotoFridge TO  False
+s2_gotoFridge	30	0	1	2	A	0	0	Change Action Possibility ::202::  Shall we get a drink together? (Dutch) to 0
+s2_gotoFridge	30	0	1	3	A	0	0	Change Action Possibility ::203::Shall I return to charging area? (Dutch) to 0
+s2_gotoFridge	30	0	1	4	A	0	0	Execute sequence 'gotoFridge-SET' on ::3::Care-O-Bot 3.6
+s2_gotoFridge	30	0	1	5	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+s2_waitAtDoor	30	0	1	0	R	0	0	Location of ::3::Care-O-Bot 3.6 is ::603:: Door Left Side in the ZUYD Apartment
+s2_waitAtDoor	30	0	1	8	R	0	0	::500:: trayIs is Full
+s2_waitAtDoor	30	0	1	9	A	0	0	Execute sequence 'happyGUI' on ::3::Care-O-Bot 3.6
+s2_waitAtDoor	30	0	1	19	A	0	0	Execute sequence 'gotoSofaLeft-SET' on ::3::Care-O-Bot 3.6
+s2_waitAtUser	30	0	0	0	R	0	0	::500:: trayIs is Empty
+s2_waitAtUser	30	0	0	9	R	0	0	::516:: currentGUIexpression is Happy
+s2_waitAtUser	30	0	0	13	R	0	0	Location of ::3::Care-O-Bot 3.6 is ::999:: Current user Location
+s2_waitAtUser	30	0	0	14	A	0	0	Execute sequence 'basicGUI' on ::3::Care-O-Bot 3.6
+sadGUI	0	0	0	11	A	0	0	Set expression on ::3::Care-O-Bot 3.6 to sad
+sadGUI	0	0	0	12	A	0	0	SET ::516::currentGUIexpression TO  Sad
+setCupLocationTray	0	0	0	0	A	0	0	SET ::519::cupLocation TO  Tray
+setGotoKitchenCond	0	0	0	0	A	0	0	SET ::503::goto TO  kitchen
+setGotoNull	0	0	0	0	A	0	0	SET ::503::goto TO  null
+setGotoSofaCond	0	0	0	0	A	0	0	SET ::503::goto TO  sofa
+setGotoTableCond	0	0	0	0	A	0	0	SET ::503::goto TO  table
+sleep	0	1	1	0	A	0	0	Wait for 1 seconds on ::3::Care-O-Bot 3.6 
+suggestDrink	51	1	0	10	R	0	0	::504:: userNeedsDrink is True
+suggestDrink	51	1	0	11	A	0	0	::0::Care-O-Bot 3.2 says 'Would you like a drink?'
+suggestDrink	51	1	0	12	A	0	0	SET ::504::userNeedsDrink TO  False
+suggestDrink	51	1	0	13	A	0	0	SET ::505::UserToldToDrink TO  True
+surprisedGUI	0	0	0	3	A	0	0	Set expression on ::3::Care-O-Bot 3.6 to surprised
+surprisedGUI	0	0	0	9	A	0	0	SET ::516::currentGUIexpression TO  Surprised
+testUvA	0	0	0	0	A	0	0	move ::3::Care-O-Bot 3.6 to ::999:: Current user Location and wait for completion

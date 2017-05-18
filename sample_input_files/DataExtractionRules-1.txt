@@ -1,0 +1,18 @@
+pvc1; prop_name = [1]; truth_value = [3]; true = "true"; false = "false"; non_deterministic = false;
+pvc2; prop_name = [1,2,3]; truth_value = null; true = null; false = null; non_deterministic = true;
+pvc3; prop_name = [1,2,3]; truth_value = null; true = null; false = null; non_deterministic = true;
+evc1; enum_name = [3]; enum_value = [5]; has_none_value = false; non_deterministic = false;
+evc2; enum_name = [4, 7]; enum_value = [4,5]; has_none_value = true; non_deterministic = true;
+tc1; start_time = [6]; end_time = null;
+tc2; start_time = [4]; end_time = [6];
+pva1; prop_name = [2]; truth_value = [4]; true = "true"; false = "false";
+eva1; enum_name = [2]; enum_value = [7]; resets = false;
+eva2; enum_name = [3]; enum_value = [4]; resets = true;
+eva3; enum_name = "location"; enum_value = [5]; resets = false;
+eva4; enum_name = [2]; enum_value = [7]; resets = false;
+eva5; enum_name = [2]; enum_value = [7]; resets = true;
+exbnd1; behaviour_values = [3]; split_character = ","; ignore_entries = [1];
+exb1; behaviour_name = [3];
+del1; seconds = [3];
+sns1; seconds = [9]; been_in_state = true; was_in_state = false;
+sns2; seconds = [8]; been_in_state = false; was_in_state = true;
