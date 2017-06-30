@@ -1,0 +1,861 @@
+--------------------------------------------------------------------------------
+--	file generated Fri Jun 30 14:18:39 2017 using CRuToN v1.0.0
+--
+--  true non-determinism: yes
+--  minimum one state for state_n_seconds: no
+--  seconds per state: 600
+--  max seconds for state_n_seconds: 5000
+--------------------------------------------------------------------------------
+--	behaviours:
+--
+--		answerDoorBell		 [priority: 70][not interruptible][schedulable]
+--		checkBell		 [priority: 80][not interruptible][schedulable]
+--		lowerTray		 [priority: 0][not interruptible][not schedulable]
+--		raiseTray		 [priority: 0][not interruptible][not schedulable]
+--		S1_alertFridgeDoor		 [priority: 60][not interruptible][schedulable]
+--		S1_continueWatchTV		 [priority: 35][interruptible][schedulable]
+--		S1_goToKitchen		 [priority: 40][interruptible][schedulable]
+--		S1_gotoSofa		 [priority: 40][interruptible][schedulable]
+--		S1_gotoTable		 [priority: 40][interruptible][schedulable]
+--		S1_kitchenAwaitCmd		 [priority: 40][interruptible][schedulable]
+--		S1_Med_5PM		 [priority: 50][interruptible][not schedulable]
+--		S1_Med_5PM_Remind		 [priority: 50][interruptible][schedulable]
+--		S1_Med_5PM_Reset		 [priority: 90][not interruptible][schedulable]
+--		S1_remindFridgeDoor		 [priority: 80][not interruptible][schedulable]
+--		S1_ResetAllGoals		 [priority: 0][not interruptible][not schedulable]
+--		S1_ReturnHome		 [priority: 40][interruptible][schedulable]
+--		S1_Set_Continue		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_GoToKitchen		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_GoToSofa		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_GoToTable		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_ReturnHome		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_WaitHere		 [priority: 0][not interruptible][not schedulable]
+--		S1_Set_Watch_TV		 [priority: 0][not interruptible][not schedulable]
+--		S1_sleep		 [priority: 10][interruptible][schedulable]
+--		S1_sofaAwaitCmd		 [priority: 40][interruptible][schedulable]
+--		S1_tableAwaitCmd		 [priority: 40][interruptible][schedulable]
+--		S1_WaitHere		 [priority: 40][interruptible][schedulable]
+--		S1_watchTV		 [priority: 30][interruptible][schedulable]
+--		T_medicine		 [priority: 0][not interruptible][not schedulable]
+--		T_moveTo_person		 [priority: 0][not interruptible][not schedulable]
+--		unCheckBell		 [priority: 80][not interruptible][schedulable]
+--------------------------------------------------------------------------------
+MODULE main
+    --------------------------------------------------------------------------------
+    --	Variables
+    --------------------------------------------------------------------------------
+    VAR
+        time: {_00_00_00_to_16_59_00, _17_00_00_to_23_59_00};
+        step: {step_none, step_1, step_2, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10, step_11, step_12, step_13, step_14, step_15};
+        schedule: {schedule_none, schedule_answerDoorBell, schedule_checkBell, schedule_lowerTray, schedule_raiseTray, schedule_S1_alertFridgeDoor, schedule_S1_continueWatchTV, schedule_S1_goToKitchen, schedule_S1_gotoSofa, schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd, schedule_S1_Med_5PM, schedule_S1_Med_5PM_Remind, schedule_S1_Med_5PM_Reset, schedule_S1_remindFridgeDoor, schedule_S1_ResetAllGoals, schedule_S1_ReturnHome, schedule_S1_Set_Continue, schedule_S1_Set_GoToKitchen, schedule_S1_Set_GoToSofa, schedule_S1_Set_GoToTable, schedule_S1_Set_ReturnHome, schedule_S1_Set_WaitHere, schedule_S1_Set_Watch_TV, schedule_S1_sleep, schedule_S1_sofaAwaitCmd, schedule_S1_tableAwaitCmd, schedule_S1_WaitHere, schedule_S1_watchTV, schedule_T_medicine, schedule_T_moveTo_person, schedule_unCheckBell};
+        last_schedule: {schedule_none, schedule_answerDoorBell, schedule_checkBell, schedule_lowerTray, schedule_raiseTray, schedule_S1_alertFridgeDoor, schedule_S1_continueWatchTV, schedule_S1_goToKitchen, schedule_S1_gotoSofa, schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd, schedule_S1_Med_5PM, schedule_S1_Med_5PM_Remind, schedule_S1_Med_5PM_Reset, schedule_S1_remindFridgeDoor, schedule_S1_ResetAllGoals, schedule_S1_ReturnHome, schedule_S1_Set_Continue, schedule_S1_Set_GoToKitchen, schedule_S1_Set_GoToSofa, schedule_S1_Set_GoToTable, schedule_S1_Set_ReturnHome, schedule_S1_Set_WaitHere, schedule_S1_Set_Watch_TV, schedule_S1_sleep, schedule_S1_sofaAwaitCmd, schedule_S1_tableAwaitCmd, schedule_S1_WaitHere, schedule_S1_watchTV, schedule_T_medicine, schedule_T_moveTo_person, schedule_unCheckBell};
+        
+        --------------------------------------------------------------------------------
+        --	Behaviour Module Instances
+        --------------------------------------------------------------------------------
+        b_answerDoorBell: behaviour(pre_answerDoorBell, can_interrupt_70, FALSE, schedule, schedule_answerDoorBell, step, step_2);
+        b_checkBell: behaviour(pre_checkBell, can_interrupt_80, FALSE, schedule, schedule_checkBell, step, step_1);
+        b_lowerTray: behaviour(pre_lowerTray, FALSE, FALSE, schedule, schedule_lowerTray, step, step_5);
+        b_raiseTray: behaviour(pre_raiseTray, FALSE, FALSE, schedule, schedule_raiseTray, step, step_5);
+        b_S1_alertFridgeDoor: behaviour(pre_S1_alertFridgeDoor, can_interrupt_60, FALSE, schedule, schedule_S1_alertFridgeDoor, step, step_9);
+        b_S1_continueWatchTV: behaviour(pre_S1_continueWatchTV, can_interrupt_35, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled | b_S1_goToKitchen.can_be_scheduled | b_S1_gotoSofa.can_be_scheduled | b_S1_gotoTable.can_be_scheduled | b_S1_kitchenAwaitCmd.can_be_scheduled | b_S1_ReturnHome.can_be_scheduled | b_S1_sofaAwaitCmd.can_be_scheduled | b_S1_tableAwaitCmd.can_be_scheduled | b_S1_WaitHere.can_be_scheduled), schedule, schedule_S1_continueWatchTV, step, step_7);
+        b_S1_goToKitchen: behaviour(pre_S1_goToKitchen, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_goToKitchen, step, step_7);
+        b_S1_gotoSofa: behaviour(pre_S1_gotoSofa, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_gotoSofa, step, step_6);
+        b_S1_gotoTable: behaviour(pre_S1_gotoTable, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_gotoTable, step, step_6);
+        b_S1_kitchenAwaitCmd: behaviour(pre_S1_kitchenAwaitCmd, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_kitchenAwaitCmd, step, step_2);
+        b_S1_Med_5PM: behaviour(pre_S1_Med_5PM, FALSE, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled), schedule, schedule_S1_Med_5PM, step, step_7);
+        b_S1_Med_5PM_Remind: behaviour(pre_S1_Med_5PM_Remind, can_interrupt_50, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled), schedule, schedule_S1_Med_5PM_Remind, step, step_5);
+        b_S1_Med_5PM_Reset: behaviour(pre_S1_Med_5PM_Reset, can_interrupt_90, FALSE, schedule, schedule_S1_Med_5PM_Reset, step, step_2);
+        b_S1_remindFridgeDoor: behaviour(pre_S1_remindFridgeDoor, can_interrupt_80, FALSE, schedule, schedule_S1_remindFridgeDoor, step, step_1);
+        b_S1_ResetAllGoals: behaviour(pre_S1_ResetAllGoals, FALSE, FALSE, schedule, schedule_S1_ResetAllGoals, step, step_15);
+        b_S1_ReturnHome: behaviour(pre_S1_ReturnHome, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_ReturnHome, step, step_5);
+        b_S1_Set_Continue: behaviour(pre_S1_Set_Continue, FALSE, FALSE, schedule, schedule_S1_Set_Continue, step, step_2);
+        b_S1_Set_GoToKitchen: behaviour(pre_S1_Set_GoToKitchen, FALSE, FALSE, schedule, schedule_S1_Set_GoToKitchen, step, step_2);
+        b_S1_Set_GoToSofa: behaviour(pre_S1_Set_GoToSofa, FALSE, FALSE, schedule, schedule_S1_Set_GoToSofa, step, step_1);
+        b_S1_Set_GoToTable: behaviour(pre_S1_Set_GoToTable, FALSE, FALSE, schedule, schedule_S1_Set_GoToTable, step, step_1);
+        b_S1_Set_ReturnHome: behaviour(pre_S1_Set_ReturnHome, FALSE, FALSE, schedule, schedule_S1_Set_ReturnHome, step, step_3);
+        b_S1_Set_WaitHere: behaviour(pre_S1_Set_WaitHere, FALSE, FALSE, schedule, schedule_S1_Set_WaitHere, step, step_1);
+        b_S1_Set_Watch_TV: behaviour(pre_S1_Set_Watch_TV, FALSE, FALSE, schedule, schedule_S1_Set_Watch_TV, step, step_2);
+        b_S1_sleep: behaviour(pre_S1_sleep, can_interrupt_10, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled | b_S1_goToKitchen.can_be_scheduled | b_S1_gotoSofa.can_be_scheduled | b_S1_gotoTable.can_be_scheduled | b_S1_kitchenAwaitCmd.can_be_scheduled | b_S1_ReturnHome.can_be_scheduled | b_S1_sofaAwaitCmd.can_be_scheduled | b_S1_tableAwaitCmd.can_be_scheduled | b_S1_WaitHere.can_be_scheduled | b_S1_continueWatchTV.can_be_scheduled | b_S1_watchTV.can_be_scheduled), schedule, schedule_S1_sleep, step, step_5);
+        b_S1_sofaAwaitCmd: behaviour(pre_S1_sofaAwaitCmd, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_sofaAwaitCmd, step, step_2);
+        b_S1_tableAwaitCmd: behaviour(pre_S1_tableAwaitCmd, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_tableAwaitCmd, step, step_2);
+        b_S1_WaitHere: behaviour(pre_S1_WaitHere, can_interrupt_40, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled), schedule, schedule_S1_WaitHere, step, step_6);
+        b_S1_watchTV: behaviour(pre_S1_watchTV, can_interrupt_30, (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled | b_S1_goToKitchen.can_be_scheduled | b_S1_gotoSofa.can_be_scheduled | b_S1_gotoTable.can_be_scheduled | b_S1_kitchenAwaitCmd.can_be_scheduled | b_S1_ReturnHome.can_be_scheduled | b_S1_sofaAwaitCmd.can_be_scheduled | b_S1_tableAwaitCmd.can_be_scheduled | b_S1_WaitHere.can_be_scheduled | b_S1_continueWatchTV.can_be_scheduled), schedule, schedule_S1_watchTV, step, step_7);
+        b_T_medicine: behaviour(pre_T_medicine, FALSE, FALSE, schedule, schedule_T_medicine, step, step_3);
+        b_T_moveTo_person: behaviour(pre_T_moveTo_person, FALSE, FALSE, schedule, schedule_T_moveTo_person, step, step_3);
+        b_unCheckBell: behaviour(pre_unCheckBell, can_interrupt_80, FALSE, schedule, schedule_unCheckBell, step, step_1);
+        
+        --------------------------------------------------------------------------------
+        --	Boolean Variables
+        --------------------------------------------------------------------------------
+        __515__GOAL_AnserDoorBell: boolean;
+        Doorbell_Last_Wattage___1: boolean;
+        __500__TrayIsRaised: boolean;
+        __504__TrayIsEmpty: boolean;
+        __501__TrayIsLowered: boolean;
+        Fridge_Freezer_In__ON_: boolean;
+        __514__GOAL_fridgeUserAlerted: boolean;
+        __506__GOAL_gotoCharger: boolean;
+        __507__GOAL_gotoTable: boolean;
+        __508__GOAL_gotoSofa: boolean;
+        __513__GOAL_watchTV: boolean;
+        Television_Wattage___10: boolean;
+        __505__GOAL_gotoKitchen: boolean;
+        __509__GOAL_waitAtKitchen: boolean;
+        __510__GOAL_waitAtSofa: boolean;
+        __511__GOAL_waitAtTable: boolean;
+        __502__5PM_MedicineDue: boolean;
+        __503__5PM_MedicineReminder: boolean;
+        __512__GOAL_waitHere: boolean;
+        
+        --------------------------------------------------------------------------------
+        --	Enumerated Types
+        --------------------------------------------------------------------------------
+        says: {none, _Doorbell_, _The_fridge_door_is_open__, _Its_time_for_your_medicine_, _Have_you_taken_your_medicine_, _Shall_we_watch_TV_together__};
+        light: {yellow, white};
+        tray: {Lowered, Raised};
+        location: {__2___Living_Room, __31___TV_location_in_the_Living_Room, __7___Kitchen_Entrance_in_the_Dining_Room, __14___Living_Room_Sofa_Area_in_the_Living_Room, __23___Living_Room_Table_in_the_Living_Room_Sofa_Area_of_the_Living_Room, __5___ChargingStation_Area_in_the_Dining_Room, __999___Current_user_Location};
+        torso: {none, the_right, the_back_position};
+        seat_occupied: {no_value, seat_1, seat_2, seat_3, seat_4, seat_5};
+        
+        --------------------------------------------------------------------------------
+        --	Been in State/Was in State Counters
+        --------------------------------------------------------------------------------
+        __514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE: {s_0, s_final};
+        __513__GOAL_watchTV_FALSE_BEEN_IN_STATE: {s_0, s_600, s_1200, s_1800, s_2400, s_3000, s_final};
+
+    --------------------------------------------------------------------------------
+    --	Assignments
+    --------------------------------------------------------------------------------
+    ASSIGN
+        init(time):= {_00_00_00_to_16_59_00, _17_00_00_to_23_59_00};
+
+        init(step):= step_none;
+        next(step):=
+            case
+                a_behaviour_can_be_scheduled: step_1;
+                
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_8): step_1;
+                (b_S1_continueWatchTV.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_continueWatchTV.is_scheduled & step = step_7): step_1;
+                (b_S1_goToKitchen.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_goToKitchen.is_scheduled & step = step_4 & b_raiseTray.preconditions_hold): step_1;
+                (b_S1_gotoSofa.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_gotoTable.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_kitchenAwaitCmd.is_scheduled & step = step_1): step_1;
+                (b_S1_Med_5PM.is_scheduled & step = step_5): step_1;
+                (b_S1_ReturnHome.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_sofaAwaitCmd.is_scheduled & step = step_1): step_1;
+                (b_S1_tableAwaitCmd.is_scheduled & step = step_1): step_1;
+                (b_S1_WaitHere.is_scheduled & step = step_6): step_1;
+                (b_S1_watchTV.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): step_1;
+                (b_S1_watchTV.is_scheduled & step = step_7): step_1;
+                (b_S1_Set_GoToKitchen.is_last_step & last_schedule = schedule_S1_alertFridgeDoor): step_9;
+                (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_alertFridgeDoor): step_9;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_continueWatchTV): step_3;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_goToKitchen): step_3;
+                (b_raiseTray.is_last_step & last_schedule = schedule_S1_goToKitchen): step_5;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_gotoSofa): step_3;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_gotoTable): step_3;
+                (b_S1_Set_GoToSofa.is_last_step & last_schedule = schedule_S1_kitchenAwaitCmd): step_2;
+                (b_S1_Set_GoToTable.is_last_step & last_schedule = schedule_S1_kitchenAwaitCmd): step_2;
+                (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_kitchenAwaitCmd): step_2;
+                (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_kitchenAwaitCmd): step_2;
+                (b_S1_Set_GoToKitchen.is_last_step & last_schedule = schedule_S1_Med_5PM): step_6;
+                (b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_Med_5PM): step_6;
+                (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_Med_5PM): step_6;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_ReturnHome): step_3;
+                (b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_sofaAwaitCmd): step_2;
+                (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_sofaAwaitCmd): step_2;
+                (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_sofaAwaitCmd): step_2;
+                (b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_tableAwaitCmd): step_2;
+                (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_tableAwaitCmd): step_2;
+                (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_tableAwaitCmd): step_2;
+                (b_lowerTray.is_last_step & last_schedule = schedule_S1_watchTV): step_3;
+                
+                a_behaviour_is_ending: step_none;
+                an_executed_behaviour_is_ending_as_a_last_action: step_none;
+                
+                step = step_1: step_2;
+                step = step_2: step_3;
+                step = step_3: step_4;
+                step = step_4: step_5;
+                step = step_5: step_6;
+                step = step_6: step_7;
+                step = step_7: step_8;
+                step = step_8: step_9;
+                step = step_9: step_10;
+                step = step_10: step_11;
+                step = step_11: step_12;
+                step = step_12: step_13;
+                step = step_13: step_14;
+                step = step_14: step_15;
+                step = step_15: step_none;
+                
+                TRUE: step_none;
+            esac;
+
+        init(last_schedule):= schedule_none;
+        next(last_schedule):=
+            case
+                executed_behaviour_execute_next: last_schedule;
+                an_executed_behaviour_is_scheduled: last_schedule;
+                TRUE: schedule;
+            esac;
+
+        init(schedule):= schedule_none;
+        next(schedule):=
+            case
+                b_S1_Med_5PM_Reset.can_be_scheduled: schedule_S1_Med_5PM_Reset;
+                (b_unCheckBell.can_be_scheduled & b_S1_remindFridgeDoor.can_be_scheduled & b_checkBell.can_be_scheduled): {schedule_unCheckBell, schedule_S1_remindFridgeDoor, schedule_checkBell};
+                (b_unCheckBell.can_be_scheduled & b_S1_remindFridgeDoor.can_be_scheduled): {schedule_unCheckBell, schedule_S1_remindFridgeDoor};
+                (b_unCheckBell.can_be_scheduled & b_checkBell.can_be_scheduled): {schedule_unCheckBell, schedule_checkBell};
+                (b_S1_remindFridgeDoor.can_be_scheduled & b_checkBell.can_be_scheduled): {schedule_S1_remindFridgeDoor, schedule_checkBell};
+                b_unCheckBell.can_be_scheduled: schedule_unCheckBell;
+                b_S1_remindFridgeDoor.can_be_scheduled: schedule_S1_remindFridgeDoor;
+                b_checkBell.can_be_scheduled: schedule_checkBell;
+                b_answerDoorBell.can_be_scheduled: schedule_answerDoorBell;
+                b_S1_alertFridgeDoor.can_be_scheduled: schedule_S1_alertFridgeDoor;
+                b_S1_Med_5PM_Remind.can_be_scheduled: schedule_S1_Med_5PM_Remind;
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_ReturnHome};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_tableAwaitCmd};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_tableAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_WaitHere.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_WaitHere};
+                (b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_kitchenAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_sofaAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_sofaAwaitCmd};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_sofaAwaitCmd.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_sofaAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_tableAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_tableAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_ReturnHome};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_ReturnHome};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_ReturnHome.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_ReturnHome};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_kitchenAwaitCmd};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_kitchenAwaitCmd};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_kitchenAwaitCmd};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_kitchenAwaitCmd.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_kitchenAwaitCmd};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_gotoSofa};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_gotoSofa};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_gotoSofa};
+                (b_S1_kitchenAwaitCmd.can_be_scheduled & b_S1_gotoSofa.can_be_scheduled): {schedule_S1_kitchenAwaitCmd, schedule_S1_gotoSofa};
+                (b_S1_gotoTable.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoTable, schedule_S1_goToKitchen};
+                (b_S1_WaitHere.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_WaitHere, schedule_S1_goToKitchen};
+                (b_S1_tableAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_tableAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_sofaAwaitCmd.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_sofaAwaitCmd, schedule_S1_goToKitchen};
+                (b_S1_ReturnHome.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_ReturnHome, schedule_S1_goToKitchen};
+                (b_S1_gotoSofa.can_be_scheduled & b_S1_goToKitchen.can_be_scheduled): {schedule_S1_gotoSofa, schedule_S1_goToKitchen};
+                b_S1_goToKitchen.can_be_scheduled: schedule_S1_goToKitchen;
+                b_S1_gotoSofa.can_be_scheduled: schedule_S1_gotoSofa;
+                b_S1_kitchenAwaitCmd.can_be_scheduled: schedule_S1_kitchenAwaitCmd;
+                b_S1_ReturnHome.can_be_scheduled: schedule_S1_ReturnHome;
+                b_S1_sofaAwaitCmd.can_be_scheduled: schedule_S1_sofaAwaitCmd;
+                b_S1_tableAwaitCmd.can_be_scheduled: schedule_S1_tableAwaitCmd;
+                b_S1_WaitHere.can_be_scheduled: schedule_S1_WaitHere;
+                b_S1_gotoTable.can_be_scheduled: schedule_S1_gotoTable;
+                b_S1_continueWatchTV.can_be_scheduled: schedule_S1_continueWatchTV;
+                b_S1_watchTV.can_be_scheduled: schedule_S1_watchTV;
+                b_S1_sleep.can_be_scheduled: schedule_S1_sleep;
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_8): {schedule_S1_Set_GoToKitchen, schedule_S1_Set_WaitHere};
+                (b_S1_continueWatchTV.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_continueWatchTV.is_scheduled & step = step_7): {schedule_S1_Set_ReturnHome, schedule_S1_Set_Continue};
+                (b_S1_goToKitchen.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_goToKitchen.is_scheduled & step = step_4 & b_raiseTray.preconditions_hold): schedule_raiseTray;
+                (b_S1_gotoSofa.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_gotoTable.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_kitchenAwaitCmd.is_scheduled & step = step_1): {schedule_S1_Set_GoToSofa, schedule_S1_Set_GoToTable, schedule_S1_Set_Continue, schedule_S1_Set_WaitHere};
+                (b_S1_Med_5PM.is_scheduled & step = step_5): {schedule_S1_Set_GoToKitchen, schedule_S1_Set_ReturnHome, schedule_S1_Set_WaitHere};
+                (b_S1_ReturnHome.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_sofaAwaitCmd.is_scheduled & step = step_1): {schedule_S1_Set_ReturnHome, schedule_S1_Set_WaitHere, schedule_S1_Set_Continue};
+                (b_S1_tableAwaitCmd.is_scheduled & step = step_1): {schedule_S1_Set_ReturnHome, schedule_S1_Set_WaitHere, schedule_S1_Set_Continue};
+                (b_S1_WaitHere.is_scheduled & step = step_6): {schedule_S1_Set_WaitHere, schedule_S1_Set_ReturnHome, schedule_S1_Set_Continue};
+                (b_S1_watchTV.is_scheduled & step = step_2 & b_lowerTray.preconditions_hold): schedule_lowerTray;
+                (b_S1_watchTV.is_scheduled & step = step_7): {schedule_S1_Set_Watch_TV, schedule_S1_Set_ReturnHome, schedule_S1_Set_Continue};
+                
+                a_behaviour_is_ending: schedule_none;
+                an_executed_behaviour_is_ending_as_a_last_action: schedule_none;
+                (an_executed_behaviour_is_ending & last_schedule != schedule): last_schedule;
+                an_executed_behaviour_is_ending: schedule_none;
+                
+                TRUE: schedule;
+            esac;
+
+        init(Doorbell_Last_Wattage___1):= {TRUE, FALSE};
+        next(Doorbell_Last_Wattage___1):= {TRUE, FALSE};
+        
+        init(Fridge_Freezer_In__ON_):= {TRUE, FALSE};
+        next(Fridge_Freezer_In__ON_):= {TRUE, FALSE};
+        
+        init(Television_Wattage___10):= {TRUE, FALSE};
+        next(Television_Wattage___10):= {TRUE, FALSE};
+        
+        init(seat_occupied):= {no_value, seat_1, seat_2, seat_3, seat_4, seat_5};
+        next(seat_occupied):= {no_value, seat_1, seat_2, seat_3, seat_4, seat_5};
+        
+        init(__500__TrayIsRaised):= FALSE;
+        next(__500__TrayIsRaised):=
+            case
+                (b_lowerTray.is_scheduled & step = step_4): FALSE;
+                (b_raiseTray.is_scheduled & step = step_4): TRUE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_1): FALSE;
+                
+                TRUE: __500__TrayIsRaised;
+            esac;
+
+        init(__501__TrayIsLowered):= TRUE;
+        next(__501__TrayIsLowered):=
+            case
+                (b_lowerTray.is_scheduled & step = step_5): TRUE;
+                (b_raiseTray.is_scheduled & step = step_5): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_2): TRUE;
+                
+                TRUE: __501__TrayIsLowered;
+            esac;
+
+        init(__502__5PM_MedicineDue):= TRUE;
+        next(__502__5PM_MedicineDue):=
+            case
+                (b_S1_Med_5PM.is_scheduled & step = step_6): FALSE;
+                (b_S1_Med_5PM_Reset.is_scheduled & step = step_1): TRUE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_3): TRUE;
+                
+                TRUE: __502__5PM_MedicineDue;
+            esac;
+
+        init(__503__5PM_MedicineReminder):= FALSE;
+        next(__503__5PM_MedicineReminder):=
+            case
+                (b_S1_Med_5PM.is_scheduled & step = step_7): TRUE;
+                (b_S1_Med_5PM_Remind.is_scheduled & step = step_5): FALSE;
+                (b_S1_Med_5PM_Reset.is_scheduled & step = step_2): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_4): FALSE;
+                
+                TRUE: __503__5PM_MedicineReminder;
+            esac;
+
+        init(__504__TrayIsEmpty):= TRUE;
+        next(__504__TrayIsEmpty):=
+            case
+                (b_S1_ResetAllGoals.is_scheduled & step = step_5): TRUE;
+                
+                TRUE: __504__TrayIsEmpty;
+            esac;
+
+        init(__505__GOAL_gotoKitchen):= FALSE;
+        next(__505__GOAL_gotoKitchen):=
+            case
+                (b_S1_goToKitchen.is_scheduled & step = step_6): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_6): FALSE;
+                (b_S1_Set_GoToKitchen.is_scheduled & step = step_1): TRUE;
+                
+                TRUE: __505__GOAL_gotoKitchen;
+            esac;
+
+        init(__506__GOAL_gotoCharger):= FALSE;
+        next(__506__GOAL_gotoCharger):=
+            case
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_5): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_7): FALSE;
+                (b_S1_ReturnHome.is_scheduled & step = step_5): FALSE;
+                (b_S1_Set_ReturnHome.is_scheduled & step = step_1): TRUE;
+                
+                TRUE: __506__GOAL_gotoCharger;
+            esac;
+
+        init(__507__GOAL_gotoTable):= FALSE;
+        next(__507__GOAL_gotoTable):=
+            case
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_6): FALSE;
+                (b_S1_gotoTable.is_scheduled & step = step_5): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_8): FALSE;
+                (b_S1_Set_GoToTable.is_scheduled & step = step_1): TRUE;
+                
+                TRUE: __507__GOAL_gotoTable;
+            esac;
+
+        init(__508__GOAL_gotoSofa):= FALSE;
+        next(__508__GOAL_gotoSofa):=
+            case
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_7): FALSE;
+                (b_S1_gotoSofa.is_scheduled & step = step_5): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_9): FALSE;
+                (b_S1_Set_GoToSofa.is_scheduled & step = step_1): TRUE;
+                
+                TRUE: __508__GOAL_gotoSofa;
+            esac;
+
+        init(__509__GOAL_waitAtKitchen):= FALSE;
+        next(__509__GOAL_waitAtKitchen):=
+            case
+                (b_S1_goToKitchen.is_scheduled & step = step_7): TRUE;
+                (b_S1_kitchenAwaitCmd.is_scheduled & step = step_2): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_10): FALSE;
+                
+                TRUE: __509__GOAL_waitAtKitchen;
+            esac;
+
+        init(__510__GOAL_waitAtSofa):= FALSE;
+        next(__510__GOAL_waitAtSofa):=
+            case
+                (b_S1_gotoSofa.is_scheduled & step = step_6): TRUE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_11): FALSE;
+                (b_S1_sofaAwaitCmd.is_scheduled & step = step_2): FALSE;
+                
+                TRUE: __510__GOAL_waitAtSofa;
+            esac;
+
+        init(__511__GOAL_waitAtTable):= FALSE;
+        next(__511__GOAL_waitAtTable):=
+            case
+                (b_S1_gotoTable.is_scheduled & step = step_6): TRUE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_12): FALSE;
+                (b_S1_tableAwaitCmd.is_scheduled & step = step_2): FALSE;
+                
+                TRUE: __511__GOAL_waitAtTable;
+            esac;
+
+        init(__512__GOAL_waitHere):= FALSE;
+        next(__512__GOAL_waitHere):=
+            case
+                (b_S1_ResetAllGoals.is_scheduled & step = step_13): FALSE;
+                (b_S1_Set_Continue.is_scheduled & step = step_1): FALSE;
+                (b_S1_Set_GoToKitchen.is_scheduled & step = step_2): FALSE;
+                (b_S1_Set_ReturnHome.is_scheduled & step = step_2): FALSE;
+                (b_S1_Set_WaitHere.is_scheduled & step = step_1): TRUE;
+                (b_S1_Set_Watch_TV.is_scheduled & step = step_2): FALSE;
+                
+                TRUE: __512__GOAL_waitHere;
+            esac;
+
+        init(__513__GOAL_watchTV):= FALSE;
+        next(__513__GOAL_watchTV):=
+            case
+                (b_S1_ResetAllGoals.is_scheduled & step = step_14): FALSE;
+                (b_S1_Set_Continue.is_scheduled & step = step_2): FALSE;
+                (b_S1_Set_ReturnHome.is_scheduled & step = step_3): FALSE;
+                (b_S1_Set_Watch_TV.is_scheduled & step = step_1): TRUE;
+                (b_S1_watchTV.is_scheduled & step = step_6): TRUE;
+                
+                TRUE: __513__GOAL_watchTV;
+            esac;
+
+        init(__514__GOAL_fridgeUserAlerted):= FALSE;
+        next(__514__GOAL_fridgeUserAlerted):=
+            case
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_9): TRUE;
+                (b_S1_remindFridgeDoor.is_scheduled & step = step_1): FALSE;
+                (b_S1_ResetAllGoals.is_scheduled & step = step_15): FALSE;
+                
+                TRUE: __514__GOAL_fridgeUserAlerted;
+            esac;
+
+        init(__515__GOAL_AnserDoorBell):= FALSE;
+        next(__515__GOAL_AnserDoorBell):=
+            case
+                (b_checkBell.is_scheduled & step = step_1): TRUE;
+                (b_unCheckBell.is_scheduled & step = step_1): FALSE;
+                
+                TRUE: __515__GOAL_AnserDoorBell;
+            esac;
+
+        init(light):= white;
+        next(light):=
+            case
+                (b_lowerTray.is_scheduled & step = step_1): yellow;
+                (b_lowerTray.is_scheduled & step = step_3): white;
+                (b_raiseTray.is_scheduled & step = step_1): yellow;
+                (b_raiseTray.is_scheduled & step = step_3): white;
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_1): yellow;
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_3): white;
+                (b_S1_continueWatchTV.is_scheduled & step = step_1): yellow;
+                (b_S1_continueWatchTV.is_scheduled & step = step_4): white;
+                (b_S1_goToKitchen.is_scheduled & step = step_1): yellow;
+                (b_S1_goToKitchen.is_scheduled & step = step_5): white;
+                (b_S1_gotoSofa.is_scheduled & step = step_1): yellow;
+                (b_S1_gotoSofa.is_scheduled & step = step_4): white;
+                (b_S1_gotoTable.is_scheduled & step = step_1): yellow;
+                (b_S1_gotoTable.is_scheduled & step = step_4): white;
+                (b_S1_Med_5PM.is_scheduled & step = step_1): yellow;
+                (b_S1_Med_5PM.is_scheduled & step = step_3): white;
+                (b_S1_Med_5PM_Remind.is_scheduled & step = step_1): yellow;
+                (b_S1_Med_5PM_Remind.is_scheduled & step = step_3): white;
+                (b_S1_ReturnHome.is_scheduled & step = step_1): yellow;
+                (b_S1_ReturnHome.is_scheduled & step = step_4): white;
+                (b_S1_sleep.is_scheduled & step = step_1): white;
+                (b_S1_sleep.is_scheduled & step = step_3): yellow;
+                (b_S1_sleep.is_scheduled & step = step_5): white;
+                (b_S1_WaitHere.is_scheduled & step = step_1): white;
+                (b_S1_WaitHere.is_scheduled & step = step_3): yellow;
+                (b_S1_WaitHere.is_scheduled & step = step_5): white;
+                (b_S1_watchTV.is_scheduled & step = step_1): yellow;
+                (b_S1_watchTV.is_scheduled & step = step_4): white;
+                (b_T_medicine.is_scheduled & step = step_1): yellow;
+                (b_T_medicine.is_scheduled & step = step_3): white;
+                (b_T_moveTo_person.is_scheduled & step = step_1): yellow;
+                (b_T_moveTo_person.is_scheduled & step = step_3): white;
+                
+                TRUE: light;
+            esac;
+
+        init(location):= __5___ChargingStation_Area_in_the_Dining_Room;
+        next(location):=
+            case
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_2): __2___Living_Room;
+                (b_S1_continueWatchTV.is_scheduled & step = step_3): __31___TV_location_in_the_Living_Room;
+                (b_S1_goToKitchen.is_scheduled & step = step_3): __7___Kitchen_Entrance_in_the_Dining_Room;
+                (b_S1_gotoSofa.is_scheduled & step = step_3): __14___Living_Room_Sofa_Area_in_the_Living_Room;
+                (b_S1_gotoTable.is_scheduled & step = step_3): __23___Living_Room_Table_in_the_Living_Room_Sofa_Area_of_the_Living_Room;
+                (b_S1_Med_5PM.is_scheduled & step = step_2): __14___Living_Room_Sofa_Area_in_the_Living_Room;
+                (b_S1_Med_5PM_Remind.is_scheduled & step = step_2): __14___Living_Room_Sofa_Area_in_the_Living_Room;
+                (b_S1_ReturnHome.is_scheduled & step = step_3): __5___ChargingStation_Area_in_the_Dining_Room;
+                (b_S1_watchTV.is_scheduled & step = step_3): __14___Living_Room_Sofa_Area_in_the_Living_Room;
+                (b_T_medicine.is_scheduled & step = step_2): __999___Current_user_Location;
+                (b_T_moveTo_person.is_scheduled & step = step_2): __999___Current_user_Location;
+                
+                TRUE: location;
+            esac;
+
+        init(says):= none;
+        next(says):=
+            case
+                (b_answerDoorBell.is_scheduled & step = step_1): _Doorbell_;
+                (b_S1_alertFridgeDoor.is_scheduled & step = step_4): _The_fridge_door_is_open__;
+                (b_S1_Med_5PM.is_scheduled & step = step_4): _Its_time_for_your_medicine_;
+                (b_S1_Med_5PM_Remind.is_scheduled & step = step_4): _Have_you_taken_your_medicine_;
+                (b_S1_watchTV.is_scheduled & step = step_5): _Shall_we_watch_TV_together__;
+                
+                TRUE: none;
+            esac;
+
+        init(torso):= none;
+        next(torso):=
+            case
+                (b_S1_continueWatchTV.is_scheduled & step = step_5): the_right;
+                (b_S1_continueWatchTV.is_scheduled & step = step_6): the_back_position;
+                
+                TRUE: none;
+            esac;
+
+        init(tray):= Lowered;
+        next(tray):=
+            case
+                (b_lowerTray.is_scheduled & step = step_2): Lowered;
+                (b_raiseTray.is_scheduled & step = step_2): Raised;
+                
+                TRUE: tray;
+            esac;
+
+
+        init(__514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE):= s_0;
+        next(__514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE):=
+            case
+                __514__GOAL_fridgeUserAlerted = FALSE: s_0;
+                (__514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE = s_0 & __514__GOAL_fridgeUserAlerted = TRUE): s_final;
+                __514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE = s_final: s_final;
+                
+                TRUE: __514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE;
+            esac;
+
+        init(__513__GOAL_watchTV_FALSE_BEEN_IN_STATE):= s_0;
+        next(__513__GOAL_watchTV_FALSE_BEEN_IN_STATE):=
+            case
+                __513__GOAL_watchTV = TRUE: s_0;
+                (__513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_0 & __513__GOAL_watchTV = FALSE): s_600;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_600: s_1200;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_1200: s_1800;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_1800: s_2400;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_2400: s_3000;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_3000: s_final;
+                __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_final: s_final;
+                
+                TRUE: __513__GOAL_watchTV_FALSE_BEEN_IN_STATE;
+            esac;
+
+
+
+
+    --------------------------------------------------------------------------------
+    --	Definitions
+    --------------------------------------------------------------------------------
+    DEFINE
+        pre_answerDoorBell:= __515__GOAL_AnserDoorBell;
+        pre_checkBell:= Doorbell_Last_Wattage___1;
+        pre_lowerTray:= (__504__TrayIsEmpty & __500__TrayIsRaised);
+        pre_raiseTray:= __501__TrayIsLowered;
+        pre_S1_alertFridgeDoor:= (!__514__GOAL_fridgeUserAlerted & Fridge_Freezer_In__ON_);
+        pre_S1_continueWatchTV:= (Television_Wattage___10 & __513__GOAL_watchTV);
+        pre_S1_goToKitchen:= __505__GOAL_gotoKitchen;
+        pre_S1_gotoSofa:= __508__GOAL_gotoSofa;
+        pre_S1_gotoTable:= __507__GOAL_gotoTable;
+        pre_S1_kitchenAwaitCmd:= (__509__GOAL_waitAtKitchen & location = __7___Kitchen_Entrance_in_the_Dining_Room);
+        pre_S1_Med_5PM:= (__502__5PM_MedicineDue & time = _17_00_00_to_23_59_00);
+        pre_S1_Med_5PM_Remind:= __503__5PM_MedicineReminder;
+        pre_S1_Med_5PM_Reset:= (!__502__5PM_MedicineDue & time = _00_00_00_to_16_59_00);
+        pre_S1_remindFridgeDoor:= __514__GOAL_fridgeUserAlerted & __514__GOAL_fridgeUserAlerted_TRUE_BEEN_IN_STATE = s_final;
+        pre_S1_ResetAllGoals:= TRUE;
+        pre_S1_ReturnHome:= __506__GOAL_gotoCharger;
+        pre_S1_Set_Continue:= TRUE;
+        pre_S1_Set_GoToKitchen:= TRUE;
+        pre_S1_Set_GoToSofa:= TRUE;
+        pre_S1_Set_GoToTable:= TRUE;
+        pre_S1_Set_ReturnHome:= TRUE;
+        pre_S1_Set_WaitHere:= TRUE;
+        pre_S1_Set_Watch_TV:= TRUE;
+        pre_S1_sleep:= TRUE;
+        pre_S1_sofaAwaitCmd:= (__510__GOAL_waitAtSofa & location = __14___Living_Room_Sofa_Area_in_the_Living_Room);
+        pre_S1_tableAwaitCmd:= (__511__GOAL_waitAtTable & location = __23___Living_Room_Table_in_the_Living_Room_Sofa_Area_of_the_Living_Room);
+        pre_S1_WaitHere:= __512__GOAL_waitHere;
+        pre_S1_watchTV:= (!__513__GOAL_watchTV & __513__GOAL_watchTV_FALSE_BEEN_IN_STATE = s_final & (Television_Wattage___10 & (seat_occupied = seat_5 | (seat_occupied = seat_4 | (seat_occupied = seat_3 | (seat_occupied = seat_2 | seat_occupied = seat_1))))));
+        pre_T_medicine:= time = _17_00_00_to_23_59_00;
+        pre_T_moveTo_person:= TRUE;
+        pre_unCheckBell:= __515__GOAL_AnserDoorBell;
+        
+        can_interrupt_10:= FALSE;
+        can_interrupt_30:= (can_interrupt_10 | (schedule = schedule_S1_sleep));
+        can_interrupt_35:= (can_interrupt_30 | (schedule = schedule_S1_watchTV));
+        can_interrupt_40:= (can_interrupt_35 | (schedule = schedule_S1_continueWatchTV));
+        can_interrupt_50:= (can_interrupt_40 | (schedule = schedule_S1_WaitHere | schedule = schedule_S1_tableAwaitCmd | schedule = schedule_S1_sofaAwaitCmd | schedule = schedule_S1_ReturnHome | schedule = schedule_S1_kitchenAwaitCmd | schedule = schedule_S1_gotoTable | schedule = schedule_S1_gotoSofa | schedule = schedule_S1_goToKitchen));
+        can_interrupt_60:= (can_interrupt_50 | (schedule = schedule_S1_Med_5PM_Remind));
+        can_interrupt_70:= (can_interrupt_60);
+        can_interrupt_80:= (can_interrupt_70);
+        can_interrupt_90:= (can_interrupt_80);
+        
+        executed_behaviour_execute_next:= ((!b_S1_alertFridgeDoor.can_be_interrupted & b_S1_alertFridgeDoor.is_scheduled & step = step_8) | (!b_S1_continueWatchTV.can_be_interrupted & b_S1_continueWatchTV.is_scheduled & step = step_2) | (!b_S1_continueWatchTV.can_be_interrupted & b_S1_continueWatchTV.is_scheduled & step = step_7) | (!b_S1_goToKitchen.can_be_interrupted & b_S1_goToKitchen.is_scheduled & step = step_2) | (!b_S1_goToKitchen.can_be_interrupted & b_S1_goToKitchen.is_scheduled & step = step_4) | (!b_S1_gotoSofa.can_be_interrupted & b_S1_gotoSofa.is_scheduled & step = step_2) | (!b_S1_gotoTable.can_be_interrupted & b_S1_gotoTable.is_scheduled & step = step_2) | (!b_S1_kitchenAwaitCmd.can_be_interrupted & b_S1_kitchenAwaitCmd.is_scheduled & step = step_1) | (!b_S1_Med_5PM.can_be_interrupted & b_S1_Med_5PM.is_scheduled & step = step_5) | (!b_S1_ReturnHome.can_be_interrupted & b_S1_ReturnHome.is_scheduled & step = step_2) | (!b_S1_sofaAwaitCmd.can_be_interrupted & b_S1_sofaAwaitCmd.is_scheduled & step = step_1) | (!b_S1_tableAwaitCmd.can_be_interrupted & b_S1_tableAwaitCmd.is_scheduled & step = step_1) | (!b_S1_WaitHere.can_be_interrupted & b_S1_WaitHere.is_scheduled & step = step_6) | (!b_S1_watchTV.can_be_interrupted & b_S1_watchTV.is_scheduled & step = step_2) | (!b_S1_watchTV.can_be_interrupted & b_S1_watchTV.is_scheduled & step = step_7));
+        a_behaviour_can_be_scheduled:= (b_S1_Med_5PM_Reset.can_be_scheduled | b_unCheckBell.can_be_scheduled | b_S1_remindFridgeDoor.can_be_scheduled | b_checkBell.can_be_scheduled | b_answerDoorBell.can_be_scheduled | b_S1_alertFridgeDoor.can_be_scheduled | b_S1_Med_5PM_Remind.can_be_scheduled | b_S1_goToKitchen.can_be_scheduled | b_S1_gotoSofa.can_be_scheduled | b_S1_gotoTable.can_be_scheduled | b_S1_kitchenAwaitCmd.can_be_scheduled | b_S1_ReturnHome.can_be_scheduled | b_S1_sofaAwaitCmd.can_be_scheduled | b_S1_tableAwaitCmd.can_be_scheduled | b_S1_WaitHere.can_be_scheduled | b_S1_continueWatchTV.can_be_scheduled | b_S1_watchTV.can_be_scheduled | b_S1_sleep.can_be_scheduled);
+        a_behaviour_is_ending:= (b_S1_Med_5PM_Reset.is_last_step | b_unCheckBell.is_last_step | b_S1_remindFridgeDoor.is_last_step | b_checkBell.is_last_step | b_answerDoorBell.is_last_step | b_S1_alertFridgeDoor.is_last_step | b_S1_Med_5PM_Remind.is_last_step | b_S1_goToKitchen.is_last_step | b_S1_gotoSofa.is_last_step | b_S1_gotoTable.is_last_step | b_S1_kitchenAwaitCmd.is_last_step | b_S1_ReturnHome.is_last_step | b_S1_sofaAwaitCmd.is_last_step | b_S1_tableAwaitCmd.is_last_step | b_S1_WaitHere.is_last_step | b_S1_continueWatchTV.is_last_step | b_S1_watchTV.is_last_step | b_S1_sleep.is_last_step);
+        an_executed_behaviour_is_ending_as_a_last_action:= ((b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_continueWatchTV) | (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_continueWatchTV) | (b_S1_Set_WaitHere.is_last_step & last_schedule = schedule_S1_WaitHere) | (b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_WaitHere) | (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_WaitHere) | (b_S1_Set_Watch_TV.is_last_step & last_schedule = schedule_S1_watchTV) | (b_S1_Set_ReturnHome.is_last_step & last_schedule = schedule_S1_watchTV) | (b_S1_Set_Continue.is_last_step & last_schedule = schedule_S1_watchTV));
+        an_executed_behaviour_is_ending:= (b_lowerTray.is_last_step | b_raiseTray.is_last_step | b_S1_Set_GoToKitchen.is_last_step | b_S1_Set_GoToSofa.is_last_step | b_S1_Set_GoToTable.is_last_step | b_S1_Set_ReturnHome.is_last_step | b_S1_Set_Continue.is_last_step | b_S1_Set_WaitHere.is_last_step | b_S1_Set_Watch_TV.is_last_step);
+        an_executed_behaviour_is_scheduled:= (b_lowerTray.is_scheduled | b_raiseTray.is_scheduled | b_S1_Set_GoToKitchen.is_scheduled | b_S1_Set_GoToSofa.is_scheduled | b_S1_Set_GoToTable.is_scheduled | b_S1_Set_ReturnHome.is_scheduled | b_S1_Set_Continue.is_scheduled | b_S1_Set_WaitHere.is_scheduled | b_S1_Set_Watch_TV.is_scheduled);
+
+
+--------------------------------------------------------------------------------
+--	Behaviour Module
+--------------------------------------------------------------------------------
+MODULE behaviour(preconditions, can_interrupt, can_be_int, schedule, this_schedule, step, last_step)
+
+    DEFINE
+        preconditions_hold:= preconditions;
+        can_be_scheduled:= ((schedule = schedule_none | can_interrupt) & preconditions_hold);
+        can_be_interrupted:= can_be_int;
+        is_last_step:= (is_scheduled & step = last_step);
+        is_scheduled:= (schedule = this_schedule);
+
